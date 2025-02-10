@@ -1,0 +1,18 @@
+{% extends "encyclopedia/layout.html" %}
+{% load static %}
+
+
+
+{% block title %}
+    Error
+{% endblock %}
+
+{% block body %}
+    <h1>Oh no! An error has occurred.</h1>
+
+    <p>There's no entry for <strong> {{ title }} </strong> in the encyclopedia. </p>
+    <p>Please enjoy this image below!</p>
+
+    <img src ="{% static 'encyclopedia\american_dragon.jpg' %}"
+    
+{% endblock %}
