@@ -37,9 +37,7 @@ def entry_page(request, title):
 
 def search_entries(request):
     #print(request.method)
-    #title = request.POST['searched']
-    title = request.POST.get('searched', '').strip()
-
+    title = request.POST['searched']
     entries = util.list_entries()
     query = title
     results = [entry for entry in entries if query.lower() in entry.lower()]
@@ -79,7 +77,7 @@ def search_entries(request):
                 })
         return render(request, "encyclopedia/search_entries.html", {
             "title": title,
-            "results" : results
+            
             })
     else:
         
