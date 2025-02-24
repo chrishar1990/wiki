@@ -1,0 +1,22 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Create Page
+{% endblock %}
+
+{% block body %}
+   <h1>Create A New Page</h1>
+   <p>Title</p>
+   <form action="{% url 'encyclopedia:index' %}" method ="post">
+        {% csrf_token %}
+        <input type="text" name="title"  style="width: 70%;" value="A title"><br>
+
+        <p>Content</p>
+        <textarea name="content" cols="20" style="width: 1115px; height: 500px;">Content for the page</textarea><br>
+
+        <input type="submit" value="Submit">
+        <a href="{% url 'encyclopedia:index' %}"><button type="button" >Cancel</button></a>
+       
+        
+    </form>
+{% endblock %}
