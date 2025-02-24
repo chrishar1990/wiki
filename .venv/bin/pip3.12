@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/home/g4network/cs50W/projects/wiki/wiki/.venv/bin/python3.12
+=======
+#!/home/g4network/cs50W/projects/wiki/.venv/bin/python3.12
+>>>>>>> 595f892e5a501f259ec45736d4e426877db9094b
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -33,7 +33,11 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
+<<<<<<< HEAD
 set -gx VIRTUAL_ENV "/home/g4network/cs50W/projects/wiki/wiki/.venv"
+=======
+set -gx VIRTUAL_ENV "/home/g4network/cs50W/projects/wiki/.venv"
+>>>>>>> 595f892e5a501f259ec45736d4e426877db9094b
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
