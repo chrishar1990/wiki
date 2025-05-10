@@ -1,0 +1,30 @@
+{% extends "encyclopedia/layout.html" %}
+
+<style>
+    .my-textarea {
+        height: 200px;
+        width: 95%;
+        resize: vertical;
+        box-sizing: border-box;
+    }
+</style>
+
+
+
+{% block title %}
+    Create Page
+{% endblock %}
+
+{% block body %}
+   <h1>Create A New Page</h1>
+   <form action="{% url 'encyclopedia:create_page' %}" method="POST">
+        {% csrf_token %}
+       
+        {{ form }} 
+        <input type="submit">
+        {% if entryExist  %}
+            <div class="error-message">The title already exists in the encyclopedia.</div>
+        {% endif %}
+   </form>
+   
+{% endblock %}
