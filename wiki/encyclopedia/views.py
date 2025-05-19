@@ -155,12 +155,57 @@ def search_entries(request):
             })
         
 
+        
+def edit_page(request,title):
+
+    
+    print("View function is running!")  # Debugging: Confirm the view is being called
+    entry = util.get_entry(title)
+    
+
+    # Form Function Begins
+    class NewTaskFormEdit(forms.Form):
+        content_text_area = forms.CharField(
+            label="Content", 
+            widget=forms.Textarea(attrs={'rows': 10, 'cols': 10
+            ,'class': 'my-textarea' }),initial=(entry))
+    # Form Function Ends
+
+    if request.method == "POST":
+        form = NewTaskFormEdit(request.POST)
+
+        print("Test to see if we get here")
+        if form.is_valid():
+            print("form is valid")
+            task_content = form.cleaned_data["content_text_area"]
+            print("Content is " + task_content )
+            if task_content is None:
+                print("Value is null")
+            else:
+                util.save_entry(title, task_content)
+                entry = util.get_entry(title)
+                return render(request, "encyclopedia/entry_page.html",{
+                    "entry": entry,
+                    "title": title
+            })
+
+
+
+    return render(request, "encyclopedia/edit_page.html", {
+        "title": title,
+        "entry": entry,
+        "form": NewTaskFormEdit(),
+    })
+    
+    
+
+
+
+
 def error(request, title):
     return render(request, "encyclopedia/error.html", {
         "title": title,
         
         
     })
-
-
     
