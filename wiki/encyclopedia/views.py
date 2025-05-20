@@ -1,6 +1,8 @@
 from django import forms
 from django.http import HttpResponse
 from django.shortcuts import render
+import random
+import markdown2
 
 from . import util
 
@@ -15,7 +17,22 @@ class NewTaskForm(forms.Form):
     
 
 def index(request):
-    
+    #A test, please delete when done.
+    print("List below: ")
+    print(util.list_entries())
+    lengthofList = len(util.list_entries())
+    lengthofList = lengthofList - 1
+    randomNumber = random.randint(0, lengthofList)
+    print(randomNumber)
+    fullList = util.list_entries()
+    fullListRandomEntry = fullList[randomNumber]
+    print(fullListRandomEntry)
+    randomEntry = util.get_entry(fullList[randomNumber])
+    print(randomEntry)
+
+
+    #End of test
+
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
     })
@@ -86,7 +103,7 @@ def entry_page(request, title):
         else:
             print("Rendering entry_page.html1")
             return render(request, "encyclopedia/entry_page.html",{
-             "entry": entry,
+             "entry": markdown2.markdown(entry),
               "title": title
         })
         
@@ -95,7 +112,7 @@ def entry_page(request, title):
         print("Rendering entry_page.html2")
 
         return render(request, "encyclopedia/entry_page.html",{
-             "entry": entry,
+             "entry": markdown2.markdown(entry),
               "title": title
         })
     
@@ -119,7 +136,7 @@ def search_entries(request):
         entry = util.get_entry(title)
         if entry is not None:
             return render(request, "encyclopedia/entry_page.html",{
-             "entry": entry,
+             "entry": markdown2.markdown(entry),
               "title": title
             })
 
@@ -127,7 +144,7 @@ def search_entries(request):
             entry = util.get_entry(title.upper())
             if entry is not None:
                 return render(request, "encyclopedia/entry_page.html",{
-                "entry": entry,
+                "entry":markdown2.markdown(entry),
                 "title": title
                 })
             
@@ -137,7 +154,7 @@ def search_entries(request):
             #print(entry)
             if entry is not None:
                 return render(request, "encyclopedia/entry_page.html",{
-                "entry": entry,
+                "entry": markdown2.markdown(entry),
                 "title": title,
                 "results": results,
 
@@ -185,7 +202,7 @@ def edit_page(request,title):
                 util.save_entry(title, task_content)
                 entry = util.get_entry(title)
                 return render(request, "encyclopedia/entry_page.html",{
-                    "entry": entry,
+                    "entry": markdown2.markdown(entry),
                     "title": title
             })
 
@@ -198,7 +215,28 @@ def edit_page(request,title):
     })
     
     
+def random_page(request):
+    #A test, please delete when done.
+    print("List below: ")
+    print(util.list_entries())
+    lengthofList = len(util.list_entries())
+    lengthofList = lengthofList - 1
+    randomNumber = random.randint(0, lengthofList)
+    print(randomNumber)
+    fullList = util.list_entries()
+    fullListRandomEntry = fullList[randomNumber]
+    print(fullListRandomEntry)
+    randomEntry = util.get_entry(fullList[randomNumber])
+    print(randomEntry)
 
+    entry = randomEntry
+    title = fullListRandomEntry
+    #End of test
+
+    return render(request, "encyclopedia/entry_page.html",{
+                    "entry": markdown2.markdown(entry),
+                    "title": title
+            })
 
 
 
